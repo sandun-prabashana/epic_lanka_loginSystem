@@ -18,8 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/signup") //url
-public class registerController extends HttpServlet {
+/**
+ *
+ * @author MCTech
+ */
+@WebServlet(urlPatterns = "/newuser")
+
+public class validationController extends HttpServlet {
 
     //create reference variable
     private registerDAO registrationDao;
@@ -30,38 +35,20 @@ public class registerController extends HttpServlet {
     }
 
     
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             
             
             String user_name = req.getParameter("user_name");
-            String address = req.getParameter("address");
-            String email_address = req.getParameter("email_address");
-            String conatct = req.getParameter("conatct");
-            String password = req.getParameter("password");
-            String role = req.getParameter("role");
-
-            
-            System.out.println(password);
-            AES aes = new AES("gtevdywoap12gryd");
-            String encdata = aes.encrypt(password);
-            System.out.println(encdata);
-            
             
             Users users = new Users();
                 
                 
-                
-                users.setUser_name(user_name);
-                users.setAddress(address);
-                users.setEmail_address(email_address);
-                users.setContact(conatct);
-                users.setPassword(encdata);
-                users.setRole(role);
+            users.setUser_name(user_name);
 
-                System.out.println(users.toString());
+            System.out.println(users.toString());
 
-        boolean b = registrationDao.updateUser(users); 
+        boolean b = registrationDao.user_name_validate(users); 
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
         if (b){
@@ -76,9 +63,4 @@ public class registerController extends HttpServlet {
             Logger.getLogger(registerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        
-        
 }
-
-

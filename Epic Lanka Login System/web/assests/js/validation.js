@@ -23,7 +23,7 @@ $('#uname').on('keydown',function (event) {
         // $('#custName').css('border','2px solid lime');
         console.log(input);
         if (input=="Enter"){
-            $('#emailaddress').focus();
+            $('#address').focus();
         }
     }else {
         // $('#custName').css('border','2px solid red');
@@ -32,20 +32,20 @@ $('#uname').on('keydown',function (event) {
     }
 });
 
-var FullName=/^[0-9]{10}(V)$/;
-$('#id').on('keydown',function (event) {
+var FullName=/^[A-Z]{1}[a-z]{1,9}$/;
+$('#address').on('keydown',function (event) {
     var input=(event.key);
-    let inputName=$('#id').val();
+    let inputName=$('#address').val();
     if (FullName.test(inputName)){
         $('#spanfname').text('');
         // $('#custName').css('border','2px solid lime');
         if (input=="Enter"){
-            $('#uname').focus();
+            $('#emailaddress').focus();
         }
     }else {
         // $('#custName').css('border','2px solid red');
-        $('#spanfname').text('Data format Is Wrong(Ex:-2000284024V)');
-        $('#id').focus();
+        $('#spanfname').text('Data format Is Wrong(Ex:-Colombo)');
+        $('#address').focus();
     }
 });
 

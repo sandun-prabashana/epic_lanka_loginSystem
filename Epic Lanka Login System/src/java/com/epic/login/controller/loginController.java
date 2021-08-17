@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.epic.login.model.Users;
 import com.epic.login.dao.loginDAO;
+import com.epic.login.dao.registerDAO;
 import com.epic.login.security.AES;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +25,10 @@ import java.util.logging.Logger;
 
 @WebServlet("/login")
 public class loginController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private loginDAO logindao;
+	private registerDAO registerdao;
 
 	public void init() {
-		logindao = new loginDAO();
+		registerdao = new registerDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,7 @@ try{
 		users.setPassword(encdata);
 
 		
-			if (logindao.validate(users)) {
+			if (registerdao.validate(users)) {
                                 
 				response.sendRedirect("profile.jsp?email="+email);
                                 System.out.println("ok");

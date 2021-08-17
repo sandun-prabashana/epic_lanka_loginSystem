@@ -2,20 +2,27 @@ package com.epic.login.model;
 
 
 public class Users {
-    private String id;
     private String user_name;
+    private String address;
     private String email_address;
     private String contact;
     private String password;
     private String role;
 
-    public String getId() {
-        return id;
+    public Users() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Users(String user_name, String address, String email_address, String contact, String password, String role) {
+        this.user_name = user_name;
+        this.address = address;
+        this.email_address = email_address;
+        this.contact = contact;
+        this.password = password;
+        this.role = role;
     }
+
+    
+
     
     public String getUser_name() {
         return user_name;
@@ -25,7 +32,16 @@ public class Users {
         this.user_name = user_name;
     }
 
+    public String getAddress() {
+        return address;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    
     public String getContact() {
         return contact;
     }

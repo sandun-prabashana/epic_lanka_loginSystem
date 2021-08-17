@@ -2,5 +2,7 @@
     "elements": {
         "spam": {}
     },
-    "attributes": {}
+    "attributes": {
+        "aria-current": {}
+    }
 }

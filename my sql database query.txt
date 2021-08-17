@@ -3,7 +3,7 @@ create database user;
 use user;
 
 create table users(
-id varchar(12) NOT NULL,
+id NOT NULL AUTO_INCREMENT,
 user_name varchar(20),
 address varchar(20),
 email_address varchar(30),

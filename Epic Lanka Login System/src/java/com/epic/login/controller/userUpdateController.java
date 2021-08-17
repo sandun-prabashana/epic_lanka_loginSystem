@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/signup") //url
-public class registerController extends HttpServlet {
+@WebServlet(urlPatterns = "/update") //url
+public class userUpdateController extends HttpServlet {
 
     //create reference variable
     private registerDAO registrationDao;
@@ -30,17 +30,18 @@ public class registerController extends HttpServlet {
     }
 
     
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             
             
-            String user_name = req.getParameter("user_name");
-            String address = req.getParameter("address");
+            String user_name = req.getParameter("user_name1");
+            String address = req.getParameter("address1");
             String email_address = req.getParameter("email_address");
             String conatct = req.getParameter("conatct");
             String password = req.getParameter("password");
             String role = req.getParameter("role");
 
+            System.out.println(address);
             
             System.out.println(password);
             AES aes = new AES("gtevdywoap12gryd");

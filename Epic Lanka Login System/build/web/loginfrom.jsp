@@ -62,15 +62,16 @@
         <h2>Sign Up</h2>
 <!--        <form action="<%= request.getContextPath() %>/register" method="post">-->
         
-         <label>
-          <span>ID Number</span>
-          <input id="id" class="input1" type="text" required="" name="id"/>
-          <span id="spanfname" class="lbl-error"></span>
-        </label>
+
         <label>
           <span>User Name</span>
           <input id="uname" class="input1" type="text" required="" name="user_name"/>
           <span id="spanuname" class="lbl-error"></span>
+        </label>
+        <label>
+          <span>Address</span>
+          <input id="address" class="input1" type="text" required="" name="address"/>
+          <span id="spanfname" class="lbl-error"></span>
         </label>
         <label>
           <span>Email Address</span>
@@ -111,42 +112,6 @@
   <script src="assests/js/validation.js"></script>
   <script src="assests/js/data.js"></script>
 
-  
-<!--  <script>
-    $("#signup").click(function (){
-        var id = $("#id").val();
-        var userName = $("#uname").val();
-        var email = $("#emailaddress").val();
-        var contact = $("#number").val();
-        var password = $("#password").val();
-        var role = document.getElementById("role").value;
-        // var form = $("#signinForm").serialize();
-
-        $.ajax({
-            url: '/Epic_Lanka_Login_System/signup',
-            method: 'POST',
-            async: true,
-            data: {
-                "id":id,
-                "user_name":userName,
-                "email_address":email,
-                "conatct":contact,
-                "password":password,
-                "role":role,
-            },
-            dataType: "json",
-            success: function (response,textState, xhr) {
-                if (response.operation==="success"){
-                    window.location.href="loginfrom.jsp"
-                }else{
-                    
-                    swal("User Already Registered", "Fail");
-                }
-            },
-
-        });
-    });
-</script>-->
   
 </body>
 </html>
