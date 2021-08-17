@@ -61,7 +61,7 @@ public class registerController extends HttpServlet {
 
                 System.out.println(users.toString());
 
-        boolean b = registrationDao.updateUser(users); 
+        boolean b = registrationDao.registerEmployee(users); 
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");
         if (b){

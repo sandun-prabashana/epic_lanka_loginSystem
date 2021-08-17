@@ -73,7 +73,7 @@
                       <h6 class="mb-0">Mobile</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" id="number1" >
+                      <input type="text" id="conatct1" >
                     </div>
                   </div>
                   <hr>

@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,50 +34,54 @@ public class userUpdateController extends HttpServlet {
 
     
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            
+            
         try {
+            JsonReader reader = Json.createReader(req.getReader());
+            JsonObject jsonObject = reader.readObject();
             
+            String userName = jsonObject.getString("user_name");
+            String address = jsonObject.getString("address");
+            String email = jsonObject.getString("email_address");
+            String contact = jsonObject.getString("contact");
+            String password = jsonObject.getString("password");
+            String role = jsonObject.getString("role");
             
-            String user_name = req.getParameter("user_name1");
-            String address = req.getParameter("address1");
-            String email_address = req.getParameter("email_address");
-            String conatct = req.getParameter("conatct");
-            String password = req.getParameter("password");
-            String role = req.getParameter("role");
-
+            System.out.println(userName);
             System.out.println(address);
-            
+            System.out.println(email);
+//            System.out.println(contact);
             System.out.println(password);
+            System.out.println(role);
+            
+            
             AES aes = new AES("gtevdywoap12gryd");
             String encdata = aes.encrypt(password);
             System.out.println(encdata);
             
+            Users user = new Users();
             
-            Users users = new Users();
-                
-                
-                
-                users.setUser_name(user_name);
-                users.setAddress(address);
-                users.setEmail_address(email_address);
-                users.setContact(conatct);
-                users.setPassword(encdata);
-                users.setRole(role);
-
-                System.out.println(users.toString());
-
-        boolean b = registrationDao.updateUser(users); 
-        PrintWriter writer = resp.getWriter();
-        resp.setContentType("application/json");
-        if (b){
+            user.setUser_name(userName);
+            user.setAddress(address);
+            user.setEmail_address(email);
+            user.setContact(contact);
+            user.setPassword(encdata);
+            user.setRole(role);
+            
+            boolean b = registrationDao.updateUser(user);
+            PrintWriter writer = resp.getWriter();
+            resp.setContentType("application/json");
+            if (b){
             writer.write("{\"operation\":\"success\"}");
-        }else{
-            writer.write("{\"operation\":\"failed\"}");
-        }
+            }else{
+                writer.write("{\"operation\":\"failed\"}");
+            }
             writer.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userUpdateController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(registerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(userUpdateController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
