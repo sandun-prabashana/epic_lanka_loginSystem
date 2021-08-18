@@ -56,8 +56,7 @@ public class userImageUpdateController extends HttpServlet {
                     
                     String uploadPath="C:/Users/MCTech/Documents/NetBeansProjects/Epic Lanka Login System/web/images/"+imageFileName;
                     System.out.println("Upload Path : "+uploadPath);
-                    
-                    // Uploading our selected image into the images folder
+
                     try
                     {
                         
