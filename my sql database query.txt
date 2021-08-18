@@ -10,5 +10,15 @@ email_address varchar(30),
 contact varchar(15),
 password varchar(50),
 role varchar(10),
+image varchar(100),
 PRIMARY KEY(id )
+);
+
+
+create database imageupload;
+
+ use imageupload;
+
+create table image(imageId int primary key auto_increment,
+imageFileName varchar(100)
 );

@@ -156,7 +156,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         DBConnection connection = null;
         try {
             connection = new DBConnection();
-            final String url="select user_name,address,email_address,contact,password,role from users WHERE email_address=?";
+            final String url="select user_name,address,email_address,contact,password,role,image from users WHERE email_address=?";
             PreparedStatement pstm = connection.getConnection().prepareStatement(url);
             pstm.setString(1, email);
             ResultSet rst = pstm.executeQuery();
@@ -169,7 +169,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
                 
                 System.out.println(decdata);
                 
-                load.add(new Users(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), decdata, rst.getString(6)));
+                load.add(new Users(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), decdata, rst.getString(6), rst.getString(7)));
             }
             return load;
         } catch (ClassNotFoundException e) {
@@ -205,6 +205,37 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
                     preparedStatement.setString(5, users.getPassword());
                     preparedStatement.setString(6, users.getRole());
                     preparedStatement.setString(7, users.getEmail_address());
+                    System.out.println(preparedStatement);
+
+            int i = preparedStatement.executeUpdate();
+            if (i >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+       
+        public boolean updateImage(Users users) throws ClassNotFoundException {
+            
+        final String query = "UPDATE users SET image=? WHERE email_address=?";
+        DBConnection connection = null;
+        try {
+            connection = new DBConnection();
+
+
+                    PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query); 
+                    preparedStatement.setString(1, users.getImage());
+                    preparedStatement.setString(2, users.getEmail_address());
                     System.out.println(preparedStatement);
 
             int i = preparedStatement.executeUpdate();

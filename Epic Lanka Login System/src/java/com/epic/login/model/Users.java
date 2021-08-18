@@ -8,17 +8,27 @@ public class Users {
     private String contact;
     private String password;
     private String role;
+    private String image;
 
     public Users() {
     }
 
-    public Users(String user_name, String address, String email_address, String contact, String password, String role) {
+    public Users(String user_name, String address, String email_address, String contact, String password, String role, String image) {
         this.user_name = user_name;
         this.address = address;
         this.email_address = email_address;
         this.contact = contact;
         this.password = password;
         this.role = role;
+        this.image=image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     

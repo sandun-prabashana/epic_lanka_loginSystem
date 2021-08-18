@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/controller/validationController.java</file>
-            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/controller/loginController.java</file>
+            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/web/assests/js/profiledata.js</file>
+            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/controller/userUpdateController.java</file>
             <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/controller/registerController.java</file>
-            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/web/loginfrom.jsp</file>
             <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/web/assests/js/data.js</file>
-            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/dao/registerDAO.java</file>
+            <file>file:/C:/Users/MCTech/Documents/NetBeansProjects/Epic%20Lanka%20Login%20System/src/java/com/epic/login/controller/passwordValidateController.java</file>
         </group>
     </open-files>
 </project-private>

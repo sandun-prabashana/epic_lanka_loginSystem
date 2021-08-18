@@ -27,6 +27,9 @@ function getDetailByemail() {
                             $("#password1").val(response[i].password);
                             $("#role1").val(response[i].role);
                             
+                            console.log(response[i].image);
+                                 $(imgshow).attr("src", "images/"+response[i].image);
+
 
                                     }
                                 }
@@ -82,3 +85,41 @@ $("#update").click(function (){
 
     }
     });
+    
+    
+    $("#uploadImage").click(function (){
+
+
+        var filename = $('#imgload').val();
+        if (filename.substring(3,11) == 'fakepath') {
+            filename = filename.substring(12);
+        } // Remove c:\fake at beginning from localhost chrome
+        console.log(filename);
+
+        var email = $("#email1").val();
+//        var image = $("#imgload").val();
+//            var image = document.getElementById("imgload").files[0];
+
+        $.ajax({
+            url: '/Epic_Lanka_Login_System/updateImage',
+            type: 'PUT',
+            async: true,
+            contentType: "application/json",
+            data:JSON.stringify( {
+                "email_address":email,
+                "image":filename,
+            }),
+            success: function (response,textState, xhr) {
+                if (response.operation==="success"){
+                    swal("User Image Update Success", "Success");
+                    getDetailByemail();
+                }else{
+                    
+                    swal("User Image Update Fail", "Fail");
+                }
+            
+            },
+
+        });
+    });    
+                
