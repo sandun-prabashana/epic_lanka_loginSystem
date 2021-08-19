@@ -18,7 +18,7 @@
     
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="loginfrom.jsp">Home</a></li>
               <li class="breadcrumb-item active">User Profile</li>
             </ol>
           </nav>
@@ -73,7 +73,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="email" id="email1" value=<%= request.getParameter("email") %>>
+                      <input type="email" id="email1" value=<%= request.getParameter("email") %> disabled >
                     </div>
                   </div>
                   <hr>
@@ -100,7 +100,7 @@
                       <h6 class="mb-0">Role</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" id="role1" >
+                      <input type="text" id="role1" disabled >
                     </div>
                   </div>
                   <hr>

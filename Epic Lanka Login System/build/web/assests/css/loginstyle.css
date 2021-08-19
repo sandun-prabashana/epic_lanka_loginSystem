@@ -176,6 +176,7 @@ label span{
   width: 260px;
   height: 100%;
   padding-top: 360px;
+    background-image: url("../img/bg.jpg");
 }
 
 .img:before{
@@ -185,7 +186,7 @@ label span{
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url(../img/bg.jpg);
+
   background-size: cover;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
@@ -504,6 +505,7 @@ label span{
   width: 260px;
   height: 100%;
   padding-top: 360px;
+  background-image: url("../img/bg.jpg");
 }
 
 .img:before{

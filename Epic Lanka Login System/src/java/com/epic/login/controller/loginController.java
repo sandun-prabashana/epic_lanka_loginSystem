@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.epic.login.model.Users;
-import com.epic.login.dao.loginDAO;
 import com.epic.login.dao.registerDAO;
 import com.epic.login.security.AES;
 import java.util.logging.Level;
@@ -46,10 +45,19 @@ try{
 		users.setEmail_address(email);
 		users.setPassword(encdata);
 
+                
 		
 			if (registerdao.validate(users)) {
                                 
-				response.sendRedirect("profile.jsp?email="+email);
+                            String role =registerdao.getRole(email);
+                            System.out.println("oyathamay"+role);
+                            
+                            if(role.equals("ADMIN")){
+                                response.sendRedirect("adminProfile.jsp?email="+email);
+                            }else{
+                                response.sendRedirect("profile.jsp?email="+email);
+                            }
+//				response.sendRedirect("profile.jsp?email="+email);
                                 System.out.println("ok");
                                 
 			} else {

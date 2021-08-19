@@ -256,6 +256,127 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         return false;
     }
         
+
+
+
+        public String getRole(String email) {
+        String role=null;
+            DBConnection connection = null;
+    try {
+        
+        
+        connection = new DBConnection();
+        final String url="select role from users WHERE email_address=?";
+        PreparedStatement pstm = connection.getConnection().prepareStatement(url);
+        pstm.setString(1, email);
+        ResultSet rst = pstm.executeQuery();
+        
+        while (rst.next()) {
+                System.out.println(rst.getString(1));
+
+                role=rst.getString(1);
+            }
+        return role;
+    } catch (SQLException ex) {
+        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+           
+     }
+
+        
+        public ArrayList<Users> loadAllData(String role) {
+            System.out.println("reg bd");
+    try {
+        System.out.println("reg bd");
+        final String query = "Select id, user_name, address, email_address, contact from Users where role = ?";
+        
+        Users u = new Users();
+        
+        DBConnection dbConnection = null;
+        
+        ResultSet rst = null;
+        
+        dbConnection = new DBConnection();
+        PreparedStatement pstm = dbConnection.getConnection().prepareStatement(query);
+        pstm.setString(1, role);
+        rst = pstm.executeQuery();
+
+        ArrayList<Users> load = new ArrayList<>();
+        while (rst.next()) {
+            
+            load.add(new Users(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
+
+            System.out.println("hari");
+        }
+        System.out.println("noo");
+        dbConnection.connection.close();
+        return load;
+    } catch (SQLException ex) {
+        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return null;
+    }
+        
+    public boolean updateUserById(Users users) throws ClassNotFoundException {
+            
+        final String query = "UPDATE users SET user_name=?,address=?,email_address=?,contact=?  WHERE id=?";
+        DBConnection connection = null;
+        try {
+            connection = new DBConnection();
+
+
+                    PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query); 
+                    preparedStatement.setString(1, users.getUser_name());
+                    preparedStatement.setString(2, users.getAddress());
+                    preparedStatement.setString(3, users.getEmail_address());
+                    preparedStatement.setString(4, users.getContact());
+                    preparedStatement.setInt(5, users.getId());
+                    System.out.println(preparedStatement);
+
+            int i = preparedStatement.executeUpdate();
+            if (i >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+        public int deleteUser(int id) throws SQLException {
+            
+        final String query="DELETE FROM users WHERE id=?";
+        
+        System.out.println("wade hari");
+        int i = 0;
+        DBConnection dbConnection = null;
+        try {
+            dbConnection = new DBConnection();
+            
+            PreparedStatement pstm = dbConnection.getConnection().prepareStatement(query);
+            pstm.setObject(1, id);
+            System.out.println("bye");
+            i = pstm.executeUpdate();
+            return i;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.connection.close();
+        }
+        return 0;
+    }
+        
 }
-
-

@@ -25,10 +25,9 @@ import com.google.gson.Gson;
 
 public class getDetailsController extends HttpServlet {
 
-    //create reference variable
+
     private registerDAO registrationDao;
 
-    //create object class loading time
     public void init() {
         registrationDao =new registerDAO();
     }

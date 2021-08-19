@@ -10,7 +10,7 @@
         <link href="assests/css/profile.css" rel="stylesheet" type="text/css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	        <link href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" rel="stylesheet">
-        <title>Success</title>
+        <title>Admin</title>
     </head>
     <body>
     <div class="container">
@@ -19,7 +19,8 @@
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="loginfrom.jsp">Home</a></li>
-              <li class="breadcrumb-item active">User Profile</li>
+              <li class="breadcrumb-item active">Admin Profile</li>
+              <li class="breadcrumb-item active"><a href="manageUser.jsp">Manage Users</a></li>
             </ol>
           </nav>
     

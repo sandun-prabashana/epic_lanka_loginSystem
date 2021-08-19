@@ -15,10 +15,4 @@ PRIMARY KEY(id )
 );
 
 
-create database imageupload;
-
- use imageupload;
-
-create table image(imageId int primary key auto_increment,
-imageFileName varchar(100)
-);
+]

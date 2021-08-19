@@ -53,7 +53,6 @@ $("#update").click(function (){
         var contact = $("#conatct1").val();
         var password = $("#password1").val();
         var role = $("#role1").val();
-        // var form = $("#signinForm").serialize();
 
         console.log("hello")
         console.log(contact);
