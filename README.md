@@ -24,6 +24,12 @@
 ![epic1](https://user-images.githubusercontent.com/67254840/129713428-ed8aaadd-f57d-4b5d-b8de-09ab82b483d6.PNG)
 
 
+*Manage Users*
+
+
+![epic5](https://user-images.githubusercontent.com/67254840/130022693-8284d1c9-cded-4601-bf9a-c25e66b9d1c5.PNG)
+
+
 
 
 
