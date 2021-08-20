@@ -14,12 +14,13 @@ public class Users {
     public Users() {
     }
 
-    public Users(int id, String user_name, String address, String email_address, String contact) {
+    public Users(int id, String user_name, String address, String email_address, String contact,String image) {
         this.id = id;
         this.user_name = user_name;
         this.address = address;
         this.email_address = email_address;
         this.contact = contact;
+        this.image= image;
     }
 
     

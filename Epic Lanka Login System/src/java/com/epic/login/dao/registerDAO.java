@@ -291,7 +291,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
             System.out.println("reg bd");
     try {
         System.out.println("reg bd");
-        final String query = "Select id, user_name, address, email_address, contact from Users where role = ?";
+        final String query = "Select id, user_name, address, email_address, contact,image from Users where role = ?";
         
         Users u = new Users();
         
@@ -307,7 +307,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         ArrayList<Users> load = new ArrayList<>();
         while (rst.next()) {
             
-            load.add(new Users(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
+            load.add(new Users(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5),rst.getString(6)));
 
             System.out.println("hari");
         }

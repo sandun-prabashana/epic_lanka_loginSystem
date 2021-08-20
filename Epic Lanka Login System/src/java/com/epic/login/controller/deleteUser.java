@@ -27,15 +27,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = "/deleteUser")
 public class deleteUser extends HttpServlet{
     
-        private registerDAO registrationDao;
+    private registerDAO registrationDao;
 
     public void init() {
         registrationDao =new registerDAO();
     }
     
         protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            System.out.println("deletemethod");
-            PrintWriter writer = resp.getWriter();
+        System.out.println("deletemethod");
+        PrintWriter writer = resp.getWriter();
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject reg = reader.readObject();
             System.out.println("jasonobject");

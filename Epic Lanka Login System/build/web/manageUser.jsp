@@ -27,12 +27,13 @@
           <div class="row gutters-sm">
             
               
-              <div class="container col-md-8">
+              <div class="container col-md-10">
   <table class="table" id="tbl">
     <thead>
       <tr>
         <th>Edit</th>
         <th>ID</th>
+        <th>Image</th>
         <th>User Name</th>
         <th>Address</th>
         <th>Email Address</th>
@@ -189,10 +190,10 @@
         table.rows[i].onclick = function()
         {
             document.getElementById("id1").value = this.cells[1].innerHTML;
-            document.getElementById("username1").value = this.cells[2].innerHTML;
-            document.getElementById("address1").value = this.cells[3].innerHTML;
-            document.getElementById("email1").value = this.cells[4].innerHTML;
-            document.getElementById("conatct1").value = this.cells[5].innerHTML;
+            document.getElementById("username1").value = this.cells[3].innerHTML;
+            document.getElementById("address1").value = this.cells[4].innerHTML;
+            document.getElementById("email1").value = this.cells[5].innerHTML;
+            document.getElementById("conatct1").value = this.cells[6].innerHTML;
         };
     }
   }
@@ -247,16 +248,27 @@ $('#updateUser').click(function () {
             contentType:"application/json",
             success: function (response) {
                 for (var i=0; i<response.length; i++) {
+                    
+                    var url = 'images/'+response[i].image;
+                    console.log(url);
+                    
                     var row = $('<tr><td>' + "<button type='button' onclick='productDisplay();' class='btn btn-default'>" +
         "<span class='glyphicon glyphicon-edit' />" +
-        "</button>"+ '</td><td>' + response[i].id + '</td><td>' + response[i].user_name + '</td><td>' + response[i].address + '</td><td>' + response[i].email_address + '</td><td>' + response[i].contact + '</td><td>' + "<button type='button' onclick='productDelete();' class='btn btn-default'>" +
+        "</button>"+ '</td><td>' + response[i].id + '</td><td id="img1" >' + "<img style="+"width:100px;"+" src="+url+" />" +'</td><td>' + response[i].user_name + '</td><td>' + response[i].address + '</td><td>' + response[i].email_address + '</td><td>' + response[i].contact + '</td><td>' + "<button type='button' onclick='productDelete();' class='btn btn-default'>" +
         "<span class='glyphicon glyphicon-remove' />" +
         "</button>" + '</td>></tr>');
                     $("#tblUser").append(row);
+                    
+                    
                 }
             }
+            
+
         });
     }
+    
+    
+
     
     function productDelete(){
     var table = document.getElementById('tbl');

@@ -32,7 +32,7 @@
                       <img src="#" alt="Admin" class="rounded-circle" width="150" id="imgshow">
                     
                       <div class="mt-3">
-                        <form action="<%=request.getContextPath()%>/updateImage" method="post" enctype="multipart/form-data">
+                        <form action="<%=request.getContextPath()%>/updateAdminImage" method="post" enctype="multipart/form-data">
                         <input class="btn btn-outline-primary" type="file" name="image" id="imgload">
                         <input type="hidden" id="email1" name="email1" value=<%= request.getParameter("email") %>>
 <!--                        <button class="btn btn-outline-primary" id="uploadImage">edit</button>-->
