@@ -27,7 +27,17 @@
 *Manage Users*
 
 
-![epic5](https://user-images.githubusercontent.com/67254840/130022693-8284d1c9-cded-4601-bf9a-c25e66b9d1c5.PNG)
+![login1](https://user-images.githubusercontent.com/67254840/130427757-59e35dcb-2649-4608-b315-91a0c4711625.PNG)
+
+
+
+*Forget Password*
+
+
+
+![login2](https://user-images.githubusercontent.com/67254840/130427806-b6692c17-2a8e-4762-80d0-4044be007632.PNG)
+
+
 
 
 
