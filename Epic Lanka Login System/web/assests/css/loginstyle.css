@@ -179,6 +179,18 @@ label span{
     background-image: url("../img/bg.jpg");
 }
 
+.img1{
+  overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 500px;
+  padding-top: 360px;
+    background-image: url("../img/bg.jpg");
+}
+
 .img:before{
   content: '';
   position: absolute;
@@ -502,6 +514,19 @@ label span{
   position: absolute;
   left: 0;
   top: 0;
+  width: 260px;
+  height: 100%;
+  padding-top: 360px;
+  background-image: url("../img/bg.jpg");
+}
+
+
+.fimg{
+  overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 110px;
   width: 260px;
   height: 100%;
   padding-top: 360px;

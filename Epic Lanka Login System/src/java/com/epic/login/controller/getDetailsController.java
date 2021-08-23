@@ -35,7 +35,7 @@ public class getDetailsController extends HttpServlet {
     
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-       ArrayList<Users> details = registrationDao.userDetails(req.getParameter("custEmail"));
+       ArrayList<Users> details = registrationDao.userDetails(req.getParameter("name"));
         String data = new Gson().toJson(details);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

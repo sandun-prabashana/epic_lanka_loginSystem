@@ -33,7 +33,7 @@ public class loginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 try{
-		String email = request.getParameter("email");
+		String name = request.getParameter("uname");
 		String password = request.getParameter("password");
                 
                 System.out.println(password);
@@ -42,20 +42,31 @@ try{
                 System.out.println(encdata);
                 
 		Users users = new Users();
-		users.setEmail_address(email);
+		users.setUser_name(name);
 		users.setPassword(encdata);
 
                 
 		
 			if (registerdao.validate(users)) {
                                 
-                            String role =registerdao.getRole(email);
+                            String role =registerdao.getRole(name);
                             System.out.println("oyathamay"+role);
                             
                             if(role.equals("ADMIN")){
-                                response.sendRedirect("adminProfile.jsp?email="+email);
+                                response.sendRedirect("adminProfile.jsp?name="+name);
                             }else{
-                                response.sendRedirect("profile.jsp?email="+email);
+                                
+                                String state="ACTIVE ";
+                                
+                                users.setStatus(state);
+                                
+                                if (registerdao.validateState(users)) {
+                                response.sendRedirect("profile.jsp?name="+name);
+                                }else{
+                                    response.sendRedirect("error.jsp");
+                                }
+                                
+                                
                             }
 //				response.sendRedirect("profile.jsp?email="+email);
                                 System.out.println("ok");

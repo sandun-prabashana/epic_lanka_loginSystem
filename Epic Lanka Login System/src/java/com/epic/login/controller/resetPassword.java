@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
-import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.servlet.ServletException;
@@ -22,9 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/updateById") 
-
-public class updateUserById extends HttpServlet {
+@WebServlet(urlPatterns = "/rest") //url
+public class resetPassword extends HttpServlet {
 
     //create reference variable
     private registerDAO registrationDao;
@@ -35,6 +33,44 @@ public class updateUserById extends HttpServlet {
     }
 
     
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            
+            
+            String user_name = req.getParameter("user_name");
+            String conatct = req.getParameter("conatct");
+            String mother = req.getParameter("mother");
+
+            
+            
+            
+            Users users = new Users();
+                
+                
+                
+                users.setUser_name(user_name);
+                users.setContact(conatct);
+                users.setMothername(mother);
+
+                System.out.println(mother);
+
+        boolean b = registrationDao.uservalidate(users); 
+        PrintWriter writer = resp.getWriter();
+        resp.setContentType("application/json");
+        if (b){
+            writer.write("{\"operation\":\"success\"}");
+        }else{
+            writer.write("{\"operation\":\"failed\"}");
+        }
+            writer.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(registerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             
             
@@ -42,17 +78,11 @@ public class updateUserById extends HttpServlet {
             JsonReader reader = Json.createReader(req.getReader());
             JsonObject jsonObject = reader.readObject();
             
-            int id = Integer.parseInt(jsonObject.getString("id"));
             String userName = jsonObject.getString("user_name");
-            String address = jsonObject.getString("address");
-            String email = jsonObject.getString("email_address");
-            String contact = jsonObject.getString("contact");
             String password = jsonObject.getString("password");
             
-            System.out.println(id);
             System.out.println(userName);
-            System.out.println(address);
-            System.out.println(email);
+
             
             AES aes = new AES("gtevdywoap12gryd");
             String encdata = aes.encrypt(password);
@@ -60,14 +90,10 @@ public class updateUserById extends HttpServlet {
             
             Users user = new Users();
             
-            user.setId(id);
             user.setUser_name(userName);
-            user.setAddress(address);
-            user.setEmail_address(email);
-            user.setContact(contact);
             user.setPassword(encdata);
             
-            boolean b = registrationDao.updateUserById(user);
+            boolean b = registrationDao.restPassword(user);
             PrintWriter writer = resp.getWriter();
             resp.setContentType("application/json");
             if (b){

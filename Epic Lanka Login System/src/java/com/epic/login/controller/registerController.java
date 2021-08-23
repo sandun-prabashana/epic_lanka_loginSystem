@@ -40,9 +40,10 @@ public class registerController extends HttpServlet {
             String conatct = req.getParameter("conatct");
             String password = req.getParameter("password");
             String role = req.getParameter("role");
+            String mother = req.getParameter("mother");
 
             
-            System.out.println(password);
+            System.out.println("mother "+ mother);
             AES aes = new AES("gtevdywoap12gryd");
             String encdata = aes.encrypt(password);
             System.out.println(encdata);
@@ -58,8 +59,9 @@ public class registerController extends HttpServlet {
                 users.setContact(conatct);
                 users.setPassword(encdata);
                 users.setRole(role);
+                users.setMothername(mother);
 
-                System.out.println(users.toString());
+                System.out.println(mother);
 
         boolean b = registrationDao.registerEmployee(users); 
         PrintWriter writer = resp.getWriter();

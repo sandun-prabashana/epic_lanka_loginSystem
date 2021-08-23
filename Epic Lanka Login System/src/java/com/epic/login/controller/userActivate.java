@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/updateById") 
+@WebServlet(urlPatterns = "/userActivate") 
 
-public class updateUserById extends HttpServlet {
+public class userActivate extends HttpServlet {
 
     //create reference variable
     private registerDAO registrationDao;
@@ -43,31 +43,17 @@ public class updateUserById extends HttpServlet {
             JsonObject jsonObject = reader.readObject();
             
             int id = Integer.parseInt(jsonObject.getString("id"));
-            String userName = jsonObject.getString("user_name");
-            String address = jsonObject.getString("address");
-            String email = jsonObject.getString("email_address");
-            String contact = jsonObject.getString("contact");
-            String password = jsonObject.getString("password");
+            String states = jsonObject.getString("state");
             
             System.out.println(id);
-            System.out.println(userName);
-            System.out.println(address);
-            System.out.println(email);
-            
-            AES aes = new AES("gtevdywoap12gryd");
-            String encdata = aes.encrypt(password);
-            System.out.println(encdata);
+   
             
             Users user = new Users();
             
             user.setId(id);
-            user.setUser_name(userName);
-            user.setAddress(address);
-            user.setEmail_address(email);
-            user.setContact(contact);
-            user.setPassword(encdata);
+            user.setStatus(states);
             
-            boolean b = registrationDao.updateUserById(user);
+            boolean b = registrationDao.updateState(user);
             PrintWriter writer = resp.getWriter();
             resp.setContentType("application/json");
             if (b){

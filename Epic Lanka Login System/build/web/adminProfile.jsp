@@ -34,7 +34,7 @@
                       <div class="mt-3">
                         <form action="<%=request.getContextPath()%>/updateAdminImage" method="post" enctype="multipart/form-data">
                         <input class="btn btn-outline-primary" type="file" name="image" id="imgload">
-                        <input type="hidden" id="email1" name="email1" value=<%= request.getParameter("email") %>>
+                        <input type="hidden" id="name1" name="username" value=<%= request.getParameter("name") %>>
 <!--                        <button class="btn btn-outline-primary" id="uploadImage">edit</button>-->
                         <input type="submit" class="btn btn-outline-primary" value="edit">
                         </form>
@@ -56,7 +56,7 @@
                       <h6 class="mb-0">User Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" id="username1" name="user_name">
+                      <input type="text" id="username1" name="user_name" value=<%= request.getParameter("name") %>>
                     </div>
                   </div>
                   <hr>
@@ -74,7 +74,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="email" id="email1" value=<%= request.getParameter("email") %> disabled >
+                      <input type="email" id="email1"  disabled >
                     </div>
                   </div>
                   <hr>

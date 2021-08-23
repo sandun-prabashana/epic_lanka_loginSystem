@@ -10,17 +10,21 @@ public class Users {
     private String password;
     private String role;
     private String image;
+    private String status;
+    private String mothername;
 
     public Users() {
     }
 
-    public Users(int id, String user_name, String address, String email_address, String contact,String image) {
+    public Users(int id, String user_name, String address, String email_address, String contact,String image,String status,String password) {
         this.id = id;
         this.user_name = user_name;
         this.address = address;
         this.email_address = email_address;
         this.contact = contact;
         this.image= image;
+        this.status=status;
+        this.password=password;
     }
 
     
@@ -34,6 +38,25 @@ public class Users {
         this.image=image;
     }
 
+    public String getMothername() {
+        return mothername;
+    }
+
+    public void setMothername(String mothername) {
+        this.mothername = mothername;
+    }
+
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
+    
     public String getImage() {
         return image;
     }

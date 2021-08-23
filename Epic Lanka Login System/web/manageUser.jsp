@@ -27,7 +27,7 @@
           <div class="row gutters-sm">
             
               
-              <div class="container col-md-10">
+              <div class="container col-md-14">
   <table class="table" id="tbl">
     <thead>
       <tr>
@@ -38,7 +38,12 @@
         <th>Address</th>
         <th>Email Address</th>
         <th>Conatct</th>
+        <th>Password</th>
+        <th>Status</th>
         <th>delete</th>
+        <th>Activate</th>
+        <th>Deactivate</th>
+        
       </tr>
     </thead>
     <tbody id="tblUser">
@@ -140,6 +145,16 @@
                   </div>
              
                   <hr>
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Password</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" id="password1" >
+                    </div>
+                  </div>
+                  <hr> 
                   <div class="row">
                     <div class="col-sm-12">
                         <button class="btn btn-outline-primary" id="updateUser">edit</button>
@@ -194,6 +209,7 @@
             document.getElementById("address1").value = this.cells[4].innerHTML;
             document.getElementById("email1").value = this.cells[5].innerHTML;
             document.getElementById("conatct1").value = this.cells[6].innerHTML;
+            document.getElementById("password1").value = this.cells[7].innerHTML;
         };
     }
   }
@@ -206,6 +222,7 @@ $('#updateUser').click(function () {
         var address = $("#address1").val();
         var email = $("#email1").val();
         var contact = $("#conatct1").val();
+        var password = $("#password1").val();
 
 
         console.log("hello")
@@ -221,6 +238,7 @@ $('#updateUser').click(function () {
                 "address":address,
                 "email_address":email,
                 "contact":contact,
+                "password":password,
             }),
             success: function (response,textState, xhr) {
                 if (response.operation==="success"){
@@ -254,9 +272,13 @@ $('#updateUser').click(function () {
                     
                     var row = $('<tr><td>' + "<button type='button' onclick='productDisplay();' class='btn btn-default'>" +
         "<span class='glyphicon glyphicon-edit' />" +
-        "</button>"+ '</td><td>' + response[i].id + '</td><td id="img1" >' + "<img style="+"width:100px;"+" src="+url+" />" +'</td><td>' + response[i].user_name + '</td><td>' + response[i].address + '</td><td>' + response[i].email_address + '</td><td>' + response[i].contact + '</td><td>' + "<button type='button' onclick='productDelete();' class='btn btn-default'>" +
+        "</button>"+ '</td><td>' + response[i].id + '</td><td id="img1" >' + "<img style="+"width:100px;"+" src="+url+" />" +'</td><td>' + response[i].user_name + '</td><td>' + response[i].address + '</td><td>' + response[i].email_address + '</td><td>' + response[i].contact + '</td><td>' + response[i].password + '</td><td>'+response[i].status + '</td><td>' + "<button type='button' onclick='productDelete();' class='btn btn-default'>" +
+        "<span class='glyphicon glyphicon-trash' />" +
+        "</button>" + '</td><td>'+ "<button type='button' onclick='userActivate();' class='btn btn-default'>" +
+        "<span class='glyphicon glyphicon-ok' />" +
+        "</button>" + '</td><td>'+ "<button type='button' onclick='userDeActivate();' class='btn btn-default'>" +
         "<span class='glyphicon glyphicon-remove' />" +
-        "</button>" + '</td>></tr>');
+        "</button>"  + '</td>></tr>');
                     $("#tblUser").append(row);
                     
                     
@@ -268,6 +290,83 @@ $('#updateUser').click(function () {
     }
     
     
+    function userActivate(){
+        var tbl1 = document.getElementById('tbl');
+        
+        for(var i = 0; i < tbl1.rows.length; i++){
+            tbl1.rows[i].onclick = function(){
+                var id= this.cells[1].innerHTML;
+                var state= "ACTIVE";
+
+                
+                
+                
+             
+            $.ajax({
+            url: '/Epic_Lanka_Login_System/userActivate',
+            type: 'PUT',
+            async: true,
+            contentType: "application/json",
+            data:JSON.stringify( {
+                "id":id,
+                "state":state,
+            }),
+            success: function (response,textState, xhr) {
+                if (response.operation==="success"){
+                    swal("User Activated", "Success");
+                    loadAllData();
+                    clear();
+                }else{
+                    
+                    swal("User Activated Fail", "Fail");
+                }
+            
+            },
+
+        });
+                
+                
+                
+            }
+        }
+    }
+    
+        function userDeActivate(){
+        var tbl1 = document.getElementById('tbl');
+        
+        for(var i = 0; i < tbl1.rows.length; i++){
+            tbl1.rows[i].onclick = function(){
+                var id= this.cells[1].innerHTML;
+                var state= "DEACTIVATE";
+                
+                
+                
+                            $.ajax({
+            url: '/Epic_Lanka_Login_System/userActivate',
+            type: 'PUT',
+            async: true,
+            contentType: "application/json",
+            data:JSON.stringify( {
+                "id":id,
+                "state":state,
+            }),
+            success: function (response,textState, xhr) {
+                if (response.operation==="success"){
+                    swal("User Deactivated", "Success");
+                    loadAllData();
+                    clear();
+                }else{
+                    
+                    swal("User Deactivated Fail", "Fail");
+                }
+            
+            },
+
+        });
+                
+            }
+        }
+    }
 
     
     function productDelete(){
@@ -312,7 +411,10 @@ $('#updateUser').click(function () {
         $("#address1").val("");
         $("#email1").val("");
          $("#conatct1").val("");
+         $("#password1").val("");
     }
+    
+
 
 </script>
 </body>

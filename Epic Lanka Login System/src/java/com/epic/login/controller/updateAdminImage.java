@@ -45,10 +45,10 @@ public class updateAdminImage extends HttpServlet {
                     
                     
                     System.out.println("In do post method of Add Image servlet.");
-                    String email = req.getParameter("email1");
+                    String name = req.getParameter("username");
                     Part file=req.getPart("image");
                     System.out.println(file);
-                    System.out.println("aaaa"+email);
+                    System.out.println("aaaa"+name);
                     
                     
                     String imageFileName=file.getSubmittedFileName();
@@ -81,14 +81,14 @@ public class updateAdminImage extends HttpServlet {
                     Users user = new Users();
                     
                     
-                    user.setEmail_address(email);
+                    user.setUser_name(name);
                     user.setImage(imageFileName);
                     
                     
                     boolean b = registrationDao.updateImage(user);
                     
                     if(b){
-                        resp.sendRedirect("profile.jsp?email="+email);
+                        resp.sendRedirect("adminProfile.jsp?name="+name);
                     }else{
                         
                     }

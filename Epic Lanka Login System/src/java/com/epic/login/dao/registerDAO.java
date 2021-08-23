@@ -23,8 +23,8 @@ public class registerDAO {
 public boolean registerEmployee(Users users) throws ClassNotFoundException {
             
         final String query = "INSERT INTO users" +
-            "  ( user_name , address , email_address , contact, password, role) VALUES " +
-            " ( ?, ?, ?, ?, ?,?);";
+            "  ( user_name , address , email_address , contact, password, role , mothername) VALUES " +
+            " ( ?, ?, ?, ?, ?,?,?);";
         DBConnection connection = null;
         try {
             connection = new DBConnection();
@@ -37,6 +37,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
                     preparedStatement.setString(4, users.getContact());
                     preparedStatement.setString(5, users.getPassword());
                     preparedStatement.setString(6, users.getRole());
+                    preparedStatement.setString(7, users.getMothername());
                     System.out.println(preparedStatement);
 
             int i = preparedStatement.executeUpdate();
@@ -59,7 +60,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
 
         public boolean validate(Users users) throws ClassNotFoundException {
             
-                final String query = "select * from users where email_address = ? and password = ? ";
+                final String query = "select * from users where user_name = ? and password = ? ";
                         
 		boolean status = false;
                 
@@ -70,7 +71,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
 
 				
 			PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query) ;
-			            preparedStatement.setString(1, users.getEmail_address());
+			            preparedStatement.setString(1, users.getUser_name());
                                     preparedStatement.setString(2, users.getPassword());
 
 			System.out.println(preparedStatement);
@@ -152,13 +153,13 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
        
 
         
-       public ArrayList<Users> userDetails(String email) {
+       public ArrayList<Users> userDetails(String name) {
         DBConnection connection = null;
         try {
             connection = new DBConnection();
-            final String url="select user_name,address,email_address,contact,password,role,image from users WHERE email_address=?";
+            final String url="select user_name,address,email_address,contact,password,role,image from users WHERE user_name=?";
             PreparedStatement pstm = connection.getConnection().prepareStatement(url);
-            pstm.setString(1, email);
+            pstm.setString(1, name);
             ResultSet rst = pstm.executeQuery();
             ArrayList<Users> load = new ArrayList<>();
             while (rst.next()) {
@@ -191,7 +192,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
        
        public boolean updateUser(Users users) throws ClassNotFoundException {
             
-        final String query = "UPDATE users SET user_name=?,address=?,email_address=?,contact=?,password=?,role=? WHERE email_address=?";
+        final String query = "UPDATE users SET user_name=?,address=?,email_address=?,contact=?,password=?,role=? WHERE user_name=?";
         DBConnection connection = null;
         try {
             connection = new DBConnection();
@@ -204,7 +205,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
                     preparedStatement.setString(4, users.getContact());
                     preparedStatement.setString(5, users.getPassword());
                     preparedStatement.setString(6, users.getRole());
-                    preparedStatement.setString(7, users.getEmail_address());
+                    preparedStatement.setString(7, users.getUser_name());
                     System.out.println(preparedStatement);
 
             int i = preparedStatement.executeUpdate();
@@ -227,7 +228,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
        
         public boolean updateImage(Users users) throws ClassNotFoundException {
             
-        final String query = "UPDATE users SET image=? WHERE email_address=?";
+        final String query = "UPDATE users SET image=? WHERE user_name=?";
         DBConnection connection = null;
         try {
             connection = new DBConnection();
@@ -235,7 +236,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
 
                     PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query); 
                     preparedStatement.setString(1, users.getImage());
-                    preparedStatement.setString(2, users.getEmail_address());
+                    preparedStatement.setString(2, users.getUser_name());
                     System.out.println(preparedStatement);
 
             int i = preparedStatement.executeUpdate();
@@ -259,16 +260,16 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
 
 
 
-        public String getRole(String email) {
+        public String getRole(String name) {
         String role=null;
             DBConnection connection = null;
     try {
         
         
         connection = new DBConnection();
-        final String url="select role from users WHERE email_address=?";
+        final String url="select role from users WHERE user_name=?";
         PreparedStatement pstm = connection.getConnection().prepareStatement(url);
-        pstm.setString(1, email);
+        pstm.setString(1, name);
         ResultSet rst = pstm.executeQuery();
         
         while (rst.next()) {
@@ -291,7 +292,7 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
             System.out.println("reg bd");
     try {
         System.out.println("reg bd");
-        final String query = "Select id, user_name, address, email_address, contact,image from Users where role = ?";
+        final String query = "Select id, user_name, address, email_address, contact,image,status,password from Users where role = ?";
         
         Users u = new Users();
         
@@ -307,7 +308,10 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         ArrayList<Users> load = new ArrayList<>();
         while (rst.next()) {
             
-            load.add(new Users(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5),rst.getString(6)));
+            AES aes = new AES("gtevdywoap12gryd");
+            String decdata =  aes.decrypt(rst.getString(8));
+            
+            load.add(new Users(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5),rst.getString(6),rst.getString(7),decdata));
 
             System.out.println("hari");
         }
@@ -318,13 +322,15 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
         return null;
     }
         
     public boolean updateUserById(Users users) throws ClassNotFoundException {
             
-        final String query = "UPDATE users SET user_name=?,address=?,email_address=?,contact=?  WHERE id=?";
+        final String query = "UPDATE users SET user_name=?,address=?,email_address=?,contact=?, password=?  WHERE id=?";
         DBConnection connection = null;
         try {
             connection = new DBConnection();
@@ -335,7 +341,8 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
                     preparedStatement.setString(2, users.getAddress());
                     preparedStatement.setString(3, users.getEmail_address());
                     preparedStatement.setString(4, users.getContact());
-                    preparedStatement.setInt(5, users.getId());
+                    preparedStatement.setString(5, users.getPassword());
+                    preparedStatement.setInt(6, users.getId());
                     System.out.println(preparedStatement);
 
             int i = preparedStatement.executeUpdate();
@@ -379,4 +386,130 @@ public boolean registerEmployee(Users users) throws ClassNotFoundException {
         return 0;
     }
         
+        
+        public boolean updateState(Users users) throws ClassNotFoundException {
+            
+        final String query = "UPDATE users SET status=?  WHERE id=?";
+        DBConnection connection = null;
+        try {
+            connection = new DBConnection();
+
+
+                    PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query); 
+                    preparedStatement.setString(1, users.getStatus());
+                    preparedStatement.setInt(2, users.getId());
+                    System.out.println(preparedStatement);
+
+            int i = preparedStatement.executeUpdate();
+            if (i >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+        
+                public boolean validateState(Users users) throws ClassNotFoundException {
+            
+                final String query = "select * from users where user_name = ? and status = ? ";
+                        
+		boolean status = false;
+                
+                DBConnection connection = null;
+                
+		try {
+                         connection = new DBConnection();
+
+				
+			PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query) ;
+			            preparedStatement.setString(1, users.getUser_name());
+                                    preparedStatement.setString(2, users.getStatus());
+
+			System.out.println(preparedStatement);
+			ResultSet rs = preparedStatement.executeQuery();
+			status = rs.next();
+		} catch (SQLException e) {
+                    try {
+                        connection.connection.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+		
+                    
+		return status;
+	}
+        
+                        public boolean uservalidate(Users users) throws ClassNotFoundException {
+            
+                final String query = "select * from users where user_name = ? and contact = ? and mothername = ? ";
+                        
+		boolean status = false;
+                
+                DBConnection connection = null;
+                
+		try {
+                         connection = new DBConnection();
+
+				
+			PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query) ;
+			preparedStatement.setString(1, users.getUser_name());
+                        preparedStatement.setString(2, users.getContact());
+                        preparedStatement.setString(3, users.getMothername());
+
+			System.out.println(preparedStatement);
+			ResultSet rs = preparedStatement.executeQuery();
+			status = rs.next();
+		} catch (SQLException e) {
+                    try {
+                        connection.connection.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(registerDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+		
+                    
+		return status;
+	}
+                        
+       public boolean restPassword(Users users) throws ClassNotFoundException {
+            
+        final String query = "UPDATE users SET password=?  WHERE user_name=?";
+        DBConnection connection = null;
+        try {
+            connection = new DBConnection();
+
+
+                    PreparedStatement preparedStatement = connection.getConnection().prepareStatement(query); 
+                    preparedStatement.setString(1, users.getPassword());;
+                    preparedStatement.setString(2, users.getUser_name());
+
+                    System.out.println(preparedStatement);
+
+            int i = preparedStatement.executeUpdate();
+            if (i >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
 }

@@ -3,7 +3,8 @@
 getDetailByemail();
 
 function getDetailByemail() {
-    let custEmail = $("#email1").val();
+
+    let name = $("#username1").val();
 
     $.ajax({
         method: 'GET',
@@ -11,7 +12,7 @@ function getDetailByemail() {
         async: true,
         data: {
                 
-                "custEmail":custEmail,
+                "name":name,
             },
         dataType: "json",
         success: function (response) {
@@ -23,6 +24,7 @@ function getDetailByemail() {
                             console.log(response[i].password)
                             $("#username1").val(response[i].user_name);
                             $("#address1").val(response[i].address);
+                            $("#email1").val(response[i].email_address)
                             $("#conatct1").val(response[i].contact);
                             $("#password1").val(response[i].password);
                             $("#role1").val(response[i].role);
