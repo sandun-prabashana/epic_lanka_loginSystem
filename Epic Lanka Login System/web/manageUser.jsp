@@ -296,7 +296,7 @@ $('#updateUser').click(function () {
         for(var i = 0; i < tbl1.rows.length; i++){
             tbl1.rows[i].onclick = function(){
                 var id= this.cells[1].innerHTML;
-                var state= "ACTIVE";
+                var state= "ACTIVE ";
 
                 
                 

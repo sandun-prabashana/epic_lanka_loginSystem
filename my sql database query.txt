@@ -12,7 +12,7 @@ password varchar(50),
 role varchar(10),
 image varchar(100),
 status varchar(20) NOT NULL DEFAULT "ACTIVE ",
-mothername vrachar(30),
+mothername varchar(30),
 PRIMARY KEY(id )
 );
 

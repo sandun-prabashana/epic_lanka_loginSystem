@@ -54,7 +54,7 @@ h1, h2 {
   content: "";
   width: 70px; height: 70px;
   border-radius: 50%;
-  border: 5px solid var(--stroke-color);
+  border: 5px solid black;
   box-sizing: border-box;
   background: var(--main-color);
 }
